@@ -1,4 +1,16 @@
-import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useState as d}from"@odoo/owl";import{Component as h,xml as f,useState as j}from"@odoo/owl";class i extends h{static props={data:{type:Array},order:{type:!0},selectedId:{type:Function},getOrder:{type:Function},count:{type:Number},cart:{type:Object}};static template=f`
+import { mount as O } from "@odoo/owl";
+import { Component as v, onWillStart as w, useState as d } from "@odoo/owl";
+import { Component as h, xml as f, useState as j } from "@odoo/owl";
+class i extends h {
+  static props = {
+    data: { type: Array },
+    order: { type: !0 },
+    selectedId: { type: Function },
+    getOrder: { type: Function },
+    count: { type: Number },
+    cart: { type: Object },
+  };
+  static template = f`
   <div class="container-fluid">
     <div class="row g-3">
         <div class="col-12 col-xl-4 col-lg-6" t-foreach="props.data" t-as="item" t-key="item.id">
@@ -34,7 +46,63 @@ import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useStat
             </div>
         </div>
     </div>
-  </div>`;add(e){this.props.count++,this.props.selectedId({id:e,count:this.props.count}),this.props.data.map((t)=>{if(t.id===e){let{id:s,name:n}=t,c=1,l=t.price,p=t.price,m=t.image.thumbnail,u={id:s,name:n,quantity:c,price:l,total:p,image:m};this.props.cart[s]=1,this.props.getOrder(u)}})}addQuantity(e){this.props.count++,this.props.selectedId({count:this.props.count}),this.props.order.map((t)=>{if(t.id===e)t.quantity++,t.total=t.price*t.quantity,this.props.cart[e]=t.quantity}),this.props.getOrder(this.props.order)}decreaseQuantity(e){if(this.props.count--,this.props.selectedId({count:this.props.count}),this.props.cart[e]>1)this.props.order.map((t)=>{if(t.id===e)t.quantity--,t.total=t.price*t.quantity,this.props.cart[e]=t.quantity}),this.props.getOrder(this.props.order);else{delete this.props.cart[e];let t=this.props.order.findIndex((s)=>s.id===e);this.props.order.splice(t,1),this.props.getOrder(this.props.order)}}}import{Component as g,xml as y,useState as F}from"@odoo/owl";class a extends g{static props={count:{type:Number},order:{type:Array},total:{type:Number},deleteItem:{type:Function},confirm:{type:Function}};static template=y`
+  </div>`;
+  add(e) {
+    (this.props.count++,
+      this.props.selectedId({ id: e, count: this.props.count }),
+      this.props.data.map((t) => {
+        if (t.id === e) {
+          let { id: s, name: n } = t,
+            c = 1,
+            l = t.price,
+            p = t.price,
+            m = t.image.thumbnail,
+            u = { id: s, name: n, quantity: c, price: l, total: p, image: m };
+          ((this.props.cart[s] = 1), this.props.getOrder(u));
+        }
+      }));
+  }
+  addQuantity(e) {
+    (this.props.count++,
+      this.props.selectedId({ count: this.props.count }),
+      this.props.order.map((t) => {
+        if (t.id === e)
+          (t.quantity++,
+            (t.total = t.price * t.quantity),
+            (this.props.cart[e] = t.quantity));
+      }),
+      this.props.getOrder(this.props.order));
+  }
+  decreaseQuantity(e) {
+    if (
+      (this.props.count--,
+      this.props.selectedId({ count: this.props.count }),
+      this.props.cart[e] > 1)
+    )
+      (this.props.order.map((t) => {
+        if (t.id === e)
+          (t.quantity--,
+            (t.total = t.price * t.quantity),
+            (this.props.cart[e] = t.quantity));
+      }),
+        this.props.getOrder(this.props.order));
+    else {
+      delete this.props.cart[e];
+      let t = this.props.order.findIndex((s) => s.id === e);
+      (this.props.order.splice(t, 1), this.props.getOrder(this.props.order));
+    }
+  }
+}
+import { Component as g, xml as y, useState as F } from "@odoo/owl";
+class a extends g {
+  static props = {
+    count: { type: Number },
+    order: { type: Array },
+    total: { type: Number },
+    deleteItem: { type: Function },
+    confirm: { type: Function },
+  };
+  static template = y`
         <div class="bg-white d-flex flex-column justify-content-center rounded-3 g-3">
             <h5 class="text-danger pt-3 ps-3" >Your Cart(<t t-esc="this.props.count"/>)</h5>
             <div t-if="this.props.count === 0" class="d-flex flex-column align-items-center pb-5">
@@ -69,10 +137,22 @@ import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useStat
             </div>
             
         </div>
-    `;deleteId(e,t){this.props.deleteItem({id:e,count:t})}}import{Component as x,xml as b}from"@odoo/owl";class r extends x{static props={order:{type:Array},total:{type:Number},start:{type:Function}};static template=b`
+    `;
+  deleteId(e, t) {
+    this.props.deleteItem({ id: e, count: t });
+  }
+}
+import { Component as x, xml as b } from "@odoo/owl";
+class r extends x {
+  static props = {
+    order: { type: Array },
+    total: { type: Number },
+    start: { type: Function },
+  };
+  static template = b`
     <div class="container">
         <div class="row">
-            <div class="col-xl-5 col-12 col-lg-8">
+            <div class="col-xl-6 col-12 col-lg-8">
                 <div class="bg-white d-flex gap-3 flex-column ps-3 rounded-2"  >
         <img class="align-self-start py-2 pt-3" src="./assets/images/icon-order-confirmed.svg" alt="..." style="width:25px"/>
         <div class="d-flex flex-column">
@@ -107,4 +187,54 @@ import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useStat
         </div>
     </div>
        
-    `}class o extends v{static template="Root";static components={ItemCard:i,OrderCard:a,StartOrder:r};setup(){this.list=d({item:[],newOrder:[]}),this.item=d({count:0,cart:{},total:0,confirm:!1}),w(async()=>{await this.dataFetching()})}async dataFetching(){try{let t=(await fetch("data.json")).json();this.list.item=await t}catch(e){console.log(`Fetching ERROR ${e}`)}}getId=(e)=>{this.item.count=e.count};getNewOrder=(e)=>{if(!Array.isArray(e))this.list.newOrder.push(e);else this.list.newOrder=e;this.item.total=this.list.newOrder.reduce((t,s)=>{return t+s.total},0)};deleteOrder=(e)=>{this.item.count=this.item.count-e.count,delete this.item.cart[e.id];let t=this.list.newOrder.findIndex((s)=>s.id===e.id);this.list.newOrder.splice(t,1)};confirmOrder=()=>{this.item.confirm=!this.item.confirm};startNewOrder=()=>{this.list.newOrder.map((e)=>{delete this.item.cart[e.id]}),this.item.count=0,this.list.newOrder=[],this.item.total=0,this.item.confirm=!this.item.confirm}}var k=await FETCH_TEMPLATES();O(o,document.body,{templates:k,dev:DEV});
+    `;
+}
+class o extends v {
+  static template = "Root";
+  static components = { ItemCard: i, OrderCard: a, StartOrder: r };
+  setup() {
+    ((this.list = d({ item: [], newOrder: [] })),
+      (this.item = d({ count: 0, cart: {}, total: 0, confirm: !1 })),
+      w(async () => {
+        await this.dataFetching();
+      }));
+  }
+  async dataFetching() {
+    try {
+      let t = (await fetch("data.json")).json();
+      this.list.item = await t;
+    } catch (e) {
+      console.log(`Fetching ERROR ${e}`);
+    }
+  }
+  getId = (e) => {
+    this.item.count = e.count;
+  };
+  getNewOrder = (e) => {
+    if (!Array.isArray(e)) this.list.newOrder.push(e);
+    else this.list.newOrder = e;
+    this.item.total = this.list.newOrder.reduce((t, s) => {
+      return t + s.total;
+    }, 0);
+  };
+  deleteOrder = (e) => {
+    ((this.item.count = this.item.count - e.count),
+      delete this.item.cart[e.id]);
+    let t = this.list.newOrder.findIndex((s) => s.id === e.id);
+    this.list.newOrder.splice(t, 1);
+  };
+  confirmOrder = () => {
+    this.item.confirm = !this.item.confirm;
+  };
+  startNewOrder = () => {
+    (this.list.newOrder.map((e) => {
+      delete this.item.cart[e.id];
+    }),
+      (this.item.count = 0),
+      (this.list.newOrder = []),
+      (this.item.total = 0),
+      (this.item.confirm = !this.item.confirm));
+  };
+}
+var k = await FETCH_TEMPLATES();
+O(o, document.body, { templates: k, dev: DEV });

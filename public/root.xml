@@ -1,0 +1,26 @@
+<templates>
+  <t t-name="Root">
+    <div 
+    class="container-fluid position-relative" 
+    style="background-color: #dfe7f5;" >
+        <div class="row g-3 px-3 py-5">
+          <div class="col-12 col-lg-8 d-flex flex-column gap-3">
+            <h3 class="ps-3 fw-bold">Desserts</h3>
+            <ItemCard data="this.list.item" selectedId = "(data) => getId(data)" getOrder="(order) => getNewOrder(order)" count="this.item.count" cart="this.item.cart" order="this.list.newOrder"/>
+          </div>
+          <div class="col-12 col-lg-4">
+            <OrderCard  count="this.item.count" order="this.list.newOrder" total="this.item.total" deleteItem="(data) => this.deleteOrder(data)" confirm="confirmOrder"/>
+          </div> 
+        </div>
+        <div t-if="this.item.confirm" class="d-none d-lg-block position-fixed top-0 start-0 vh-100 overflow-scroll py-5 vw-100 d-flex justify-content-center" 
+              style="background-color:rgba(0,0,0,0.5);z-index: 1050;padding-left:350px">
+            <StartOrder order="this.list.newOrder" total="this.item.total" start="startNewOrder"/>
+        </div>
+        <div t-if="this.item.confirm" class="d-lg-none position-fixed top-0 start-0 vh-100 overflow-scroll py-5 vw-100 d-flex justify-content-center" 
+              style="background-color:rgba(0,0,0,0.5);z-index: 1050">
+            <StartOrder order="this.list.newOrder" total="this.item.total" start="startNewOrder"/>
+        </div>
+</div>
+   
+  </t>
+</templates>

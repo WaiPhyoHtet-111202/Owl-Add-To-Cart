@@ -9,7 +9,7 @@ import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useStat
                 <div t-if="!this.props.cart[item.id]">
                   <button class="rounded-5 w-lg-50  p-lg-1 p-2 p-md-0 p-md-3 position-absolute bottom-25 start-50 
                    translate-middle-x mb-5" t-on-click="() => this.add(item.id)" style="bottom : 40px">
-                    <img src="../assets/images/icon-add-to-cart.svg" alt="custom-add-to-cart"/>
+                    <img src="./assets/images/icon-add-to-cart.svg" alt="custom-add-to-cart"/>
                     <span>Add to cart</span>
                   </button>  
                 </div>
@@ -18,11 +18,11 @@ import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useStat
                    translate-middle-x mb-5 bg-danger" style="bottom : 40px;width:9rem;">
                   
                   <button class="border-white rounded-circle p-0 ms-2" style="width:20px;height:20px;background-color:hsl(14, 86%, 42%);" t-on-click="() => this.decreaseQuantity(item.id)">
-                    <img  class="pb-2" src="../assets/images/icon-decrement-quantity.svg" alt="..." style="width:10 px"/>
+                    <img  class="pb-2" src="./assets/images/icon-decrement-quantity.svg" alt="..." style="width:10 px"/>
                   </button>
                   <span class="text-white"><t t-esc="this.props.cart[item.id]"/></span>
                   <button class="border-white rounded-circle p-0 me-2" style="width:20px;height:20px;background-color:hsl(14, 86%, 42%);" t-on-click="() => this.addQuantity(item.id)">
-                    <img class="pb-2" src="../assets/images/icon-increment-quantity.svg" alt="..." style="width:10 px"/>
+                    <img class="pb-2" src="./assets/images/icon-increment-quantity.svg" alt="..." style="width:10 px"/>
                   </button>
                   </div>  
                 </div>           
@@ -38,7 +38,7 @@ import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useStat
         <div class="bg-white d-flex flex-column justify-content-center rounded-3 g-3">
             <h5 class="text-danger pt-3 ps-3" >Your Cart(<t t-esc="this.props.count"/>)</h5>
             <div t-if="this.props.count === 0" class="d-flex flex-column align-items-center pb-5">
-              <img class="img-fluid" src="../assets/images/illustration-empty-cart.svg" alt="..."/> 
+              <img class="img-fluid" src="./assets/images/illustration-empty-cart.svg" alt="..."/> 
               <span>Your added items will appear here</span>
             </div>
             <div t-else="" class="d-flex flex-column gap-1">
@@ -60,7 +60,7 @@ import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useStat
                 <span class="fw-bold fs-4">$<t t-esc="this.props.total"/></span>
               </div>
               <div class="d-flex gap-2 justify-content-center align-items-center mx-3 my-3 rounded-3" style="background-color : hsl(13, 31%, 94%)">
-                <img class="py-3"  src="../assets/images/icon-carbon-neutral.svg" alt="..."/>
+                <img class="py-3"  src="./assets/images/icon-carbon-neutral.svg" alt="..."/>
                 <span>This is a <span class="fw-bold">carbon-netural</span> delivery</span>
               </div>
               <button class="mx-3  d-flex align-items-center rounded-5 mb-3 justify-content-center py-3 text-white" style="background-color : hsl(14, 86%, 42%)" t-on-click="this.props.confirm">
@@ -74,7 +74,7 @@ import{mount as O}from"@odoo/owl";import{Component as v,onWillStart as w,useStat
         <div class="row">
             <div class="col-xl-5 col-12 col-lg-8">
                 <div class="bg-white d-flex gap-3 flex-column ps-3 rounded-2"  >
-        <img class="align-self-start py-2 pt-3" src="../assets/images/icon-order-confirmed.svg" alt="..." style="width:25px"/>
+        <img class="align-self-start py-2 pt-3" src="./assets/images/icon-order-confirmed.svg" alt="..." style="width:25px"/>
         <div class="d-flex flex-column">
             <span class="fw-bold fs-3">Order Comfirmed</span>
             <span class="text-secondary">We hope you enjoy your food!</span>
